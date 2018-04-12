@@ -4,7 +4,6 @@ var xSize = 765;
 var ySize = 630;
 var muuren = [];
 var aantalmuuren = 10;
-//var finish = [];
 var finish1;
 var player1;
 
@@ -14,7 +13,6 @@ function setup() {
   yblock = 0
   player1 = new Player(0, 0, 30, 30);
   finish1 = new Finish(710, 575, 55, 55);
-  //finish.push(finish1);
   muur1 = new Muur(55,0, 150, 50);
   muuren.push(muur1);
   muur2 = new Muur(0,205, 50, 205);
@@ -57,11 +55,6 @@ function draw() {
   	player1.display();
   	player1.move();
     player1.collision(finish1);
- // for (var i = 0; i < finish.length; i++){
- //   finisha = finish[i];
- //   finisha.teken();
- // }
-
     yblock += 0.5;
   	xblock += 0.5;
 };
@@ -88,17 +81,11 @@ function Finish (_x, _y, _h, _b) {
     fill('green');
 		noStroke();
     rect(this.x,this.y, this.b, this.h);
-
-    //this.collision = function(ander) {
-    //	if (!(ander.x > Player + h || Player > Finish + h || y2 > y1 + b || y1 > y2 + b)){
-  //			console.log("aaa")
-	//		}
-  	}
 	}
+}
+
 function drawblock(xblock, yblock){
     noStroke();
-//		fill('red');
-//    rect(xblock, yblock, 30, 30);
 }
 
 function myRestart(){
@@ -120,27 +107,23 @@ function Player() {
   }
 
   this.move = function() {
-      // Pas op dat je speler hiermee uit het veld kan lopen!
-      // Pas de code aan zodat dat niet kan gebeuren
-      if (keyIsDown(UP_ARROW)){
-
-        this.ypos -= this.speed;
-      } else if (keyIsDown(DOWN_ARROW)){
-        this.ypos += this.speed;
-      } else if (keyIsDown(LEFT_ARROW)){
-        this.xpos -= this.speed;
-      } else if (keyIsDown(RIGHT_ARROW)){
-        this.xpos += this.speed;
-      }
-
+    if (keyIsDown(UP_ARROW)){
+      this.ypos -= this.speed;
+    }
+    else if (keyIsDown(DOWN_ARROW)){
+      this.ypos += this.speed;
+    }
+    else if (keyIsDown(LEFT_ARROW)){
+      this.xpos -= this.speed;
+    }
+    else if (keyIsDown(RIGHT_ARROW)){
+      this.xpos += this.speed;
+    }
   }
 
   this.collision = function(ander) {
-    // if (!(x2 > x1 + lengte || x1 > x2 + lengte || y2 > y1 + breedte || y1 > y2 + breedte)){
     if (!(ander.x > this.xpos + this.playerWidth || this.xpos > ander.x + ander.b || ander.y > this.ypos + this.playerHeight || this.ypos > ander.y + ander.h)){
-  		console.log("a")
       myRestart();
 		}
-    //console.log(ander.x)
   }
 }
